@@ -24,9 +24,11 @@ from mxnet.gluon import loss as gloss
 from mxnet.gluon import data as gdata
 
 net = nn.Sequential()
-net.add(nn.Conv2D(1, (5,5), strides=(2,2)))
-net.add(nn.Conv2D(1, (5,5)))
-net.add(nn.Dense(10,activation="relu"))
+net.add(nn.Conv2D(16, (5,5), strides=(2,2), activation="relu"))
+net.add(nn.Conv2D(32, (5,5), activation="relu"))
+net.add(nn.Flatten())
+net.add(nn.Dense(128, activation="relu"))
+net.add(nn.Dense(10, activation="relu"))
 net.initialize(init.Normal(sigma=0.01),ctx=mx.gpu())
 
 loss = gloss.SoftmaxCrossEntropyLoss()
